@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'personal_finance_manager',
+    'user_auth',
+    'budgeting',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -51,10 +55,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'personal_finance_manager.urls'
 
+import os
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,10 +81,15 @@ WSGI_APPLICATION = 'personal_finance_manager.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'finance_db',  # Replace with your database name
+        'USER': 'postgres',        # Replace with your database username
+        'PASSWORD': 'password123',     # Replace with your database password
+        'HOST': 'localhost',             # Set to 'localhost' or your database server address
+        'PORT': '5432',                  # Default PostgreSQL port
     }
 }
+
 
 
 # Password validation
@@ -122,4 +133,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'personal_finance_manager.CustomUser'
+AUTH_USER_MODEL = 'user_auth.CustomUser'
+
+#Post Login Redirection
+LOGIN_REDIRECT_URL = '/app/home/' 

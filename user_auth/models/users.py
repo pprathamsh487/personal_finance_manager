@@ -8,5 +8,8 @@ class CustomUser(AbstractUser):
     
     REQUIRED_FIELDS = ['email']  # Email will be required on top of username
     
+    
+    class Meta:
+        db_table = 'USERS'
     def __str__(self):
         return self.username

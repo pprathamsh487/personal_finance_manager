@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mt-5">Welcome to Your Personal Finance Dashboard</h1>
+
+        <div class="row mt-5">
+            <!-- Set Up Budget -->
+            <div class="col-md-4 text-center">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Set Up Budget</h5>
+                        <p class="card-text">Create and manage your monthly or yearly budgets for different categories.</p>
+                        <a href="{% url 'setup_budget' %}" class="btn btn-primary">Set Budget</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Track Expenses -->
+            <div class="col-md-4 text-center">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Track Expenses</h5>
+                        <p class="card-text">Record your daily expenses and keep track of your spending.</p>
+                        <a href="{% url 'track_expenses' %}" class="btn btn-primary">Track Expenses</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Insights and Analytics -->
+            <div class="col-md-4 text-center">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Insights & Analytics</h5>
+                        <p class="card-text">View trends and get insights into your spending habits.</p>
+                        <a href="{% url 'analytics' %}" class="btn btn-primary">View Insights</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center mt-5">
+        <p>Personal Finance Manager &copy; 2024</p>
+    </footer>
+</body>
+</html>
