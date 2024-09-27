@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Budget</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Create a New Budget</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_name">Budget Name:</label>
+                <input type="text" name="name" class="form-control" id="id_name" required>
+            </div>
+            
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <ul>
+                        {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                                <li>{{ field }}: {{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <button type="submit" class="btn btn-primary">Create Budget</button>
+            <a href="{% url 'budget_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

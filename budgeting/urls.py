@@ -1,7 +1,13 @@
+# urls.py
 from django.urls import path
-from .views.budget_view import BudgetView
+from .views.budget_detail_view import BudgetDetailView
+from .views.budget_list_view import BudgetListView
+from .views.create_budget_view import BudgetCreateView
+from .views.budget_entry_view import BudgetEntryCreateView
+
 urlpatterns = [
-    
-        path('set/', BudgetView.as_view(), name='setup_budget'),  # Budget setup page
-        
+    path('list/', BudgetListView.as_view(), name='budget_list'),
+    path('detail/<int:pk>/', BudgetDetailView.as_view(), name='budget_detail'),
+    path('create/', BudgetCreateView.as_view(), name='budget_create'),
+    path('entry/create/', BudgetEntryCreateView.as_view(), name='budget_entry_create'),
 ]

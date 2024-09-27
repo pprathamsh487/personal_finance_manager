@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Budgets</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Your Budgets</h1>
+        
+        <!-- List of Distinct Budgets -->
+        <ul class="list-group mt-4">
+            {% for budget in budgets %}
+            <li class="list-group-item">
+                <strong>{{ budget.name }}</strong>
+                <a href="{% url 'budget_detail' budget.id %}" class="btn btn-primary btn-sm float-right">View Details</a>
+            </li>
+            {% empty %}
+            <li class="list-group-item">You have no budgets yet.</li>
+            {% endfor %}
+        </ul>
+
+        <div class="mt-4 text-center">
+            <a href="{% url 'budget_entry_create' %}" class="btn btn-success">Set Up New Budget</a>
+        </div>
+    </div>
+</body>
+</html>
