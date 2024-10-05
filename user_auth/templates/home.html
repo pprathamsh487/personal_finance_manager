@@ -13,11 +13,11 @@
         <div class="row mt-5">
             <!-- Set Up Budget -->
             <div class="col-md-4 text-center">
-                <div class="card">f
+                <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Set Up Budget</h5>
                         <p class="card-text">Create and manage your monthly or yearly budgets for different categories.</p>
-                        <a href="{% url 'setup_budget' %}" class="btn btn-primary">Set Budget</a>
+                        <a href="{% url 'budget_create' %}" class="btn btn-primary">Set Budget</a>
                         <a href="{% url 'budget_list' %}" class="btn btn-secondary mt-2">View Budgets</a>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Track Expenses</h5>
                         <p class="card-text">Record your daily expenses and keep track of your spending.</p>
-                        <a href="{% url 'track_expenses' %}" class="btn btn-primary">Track Expenses</a>
+                        <a href="{% url 'budget_tracking'%}" class="btn btn-primary">Track Expenses</a>
                     </div>
                 </div>
             </div>

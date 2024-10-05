@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'user_auth',
     'budgeting',
     'rest_framework',
+    'expense_tracking',
 ]
 
 MIDDLEWARE = [
@@ -84,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'finance_db',  # Replace with your database name
         'USER': 'postgres',        # Replace with your database username
-        'PASSWORD': 'password123',     # Replace with your database password
+        'PASSWORD': 'postgres',     # Replace with your database password
         'HOST': 'localhost',             # Set to 'localhost' or your database server address
         'PORT': '5432',                  # Default PostgreSQL port
     }
@@ -136,4 +137,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'user_auth.CustomUser'
 
 #Post Login Redirection
-LOGIN_REDIRECT_URL = '/app/home/' 
+LOGIN_REDIRECT_URL = '/app/auth/home/' 
