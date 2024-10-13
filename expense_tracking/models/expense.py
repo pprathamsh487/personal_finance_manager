@@ -1,10 +1,10 @@
 from django.db import models
 from django.conf import settings
-from budgeting.models import Budget
+from budgeting.models import Budget, Category
 class Expense(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     budget = models.ForeignKey(Budget, on_delete=models.CASCADE, related_name='expenses')
-    category = models.CharField(max_length=255)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     date = models.DateField(auto_now_add=True)
     description = models.TextField(blank=True, null=True)

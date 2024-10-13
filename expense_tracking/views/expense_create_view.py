@@ -1,33 +1,28 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views import View
-from expense_tracking.models import Expense
+from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404
+from django.views.generic import CreateView
+from ..models import Expense
 from budgeting.models import Budget
-from expense_tracking.forms.expense_form import ExpenseForm
+from ..forms.expense_form import ExpenseForm  # Assuming you have the form for expense
+from django.contrib.auth.mixins import LoginRequiredMixin
+class ExpenseCreateView(LoginRequiredMixin, CreateView):
+    model = Expense
+    form_class = ExpenseForm
+    template_name = 'expense_tracking/expense_form.html'
 
-class ExpenseCreateView(View):
-    def get(self, request, budget_id):
+    def get_form_kwargs(self):
+        # Get the current budget ID from the URL or request
+        kwargs = super().get_form_kwargs()
+        budget_id = self.kwargs.get('budget_id')  # Assume the budget ID is passed in the URL
         budget = get_object_or_404(Budget, id=budget_id)
-        form = ExpenseForm()
-        context = {
-            'form': form,
-            'budget': budget
-        }
-        return render(request, 'expense_tracking/expense_form.html', context)
+        kwargs['budget'] = budget  # Pass the budget to the form for filtering categories
+        return kwargs
 
-    def post(self, request, budget_id):
-        budget = get_object_or_404(Budget, id=budget_id)
-        form = ExpenseForm(request.POST)
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.budget = form.cleaned_data['budget']
+        return super().form_valid(form)
 
-        if form.is_valid():
-            expense = form.save(commit=False)
-            expense.budget = budget
-            expense.user_id = budget.user_id
-            expense.save()
-
-            return redirect('expense_list', budget_id=budget_id)
-        
-        context = {
-            'form': form,
-            'budget': budget
-        }
-        return render(request, 'expense_tracking/expense_form.html', context)
+    def get_success_url(self):
+        # Redirect to a page showing the expenses for the current budget
+        return reverse_lazy('expense_list', kwargs={'budget_id': self.object.budget.id})

@@ -3,33 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Budget</title>
+    <title>Create Budget and Entry</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script>
+        function addCategoryField() {
+            const categoryContainer = document.getElementById('category-fields');
+            const newField = document.createElement('div');
+            newField.className = 'row mb-3';
+            newField.innerHTML = `
+                <div class="col">
+                    <label for="category_name">Category Name</label>
+                    <input type="text" name="category_name" class="form-control" required>
+                </div>
+                <div class="col">
+                    <label for="amount">Amount</label>
+                    <input type="number" name="amount" class="form-control" required>
+                </div>
+            `;
+            categoryContainer.appendChild(newField);
+        }
+    </script>
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="text-center">Create a New Budget</h1>
+        <h1 class="text-center">Create a New Budget & Add Entry</h1>
 
         <form method="POST">
             {% csrf_token %}
-            <div class="form-group">
-                <label for="id_name">Budget Name:</label>
-                <input type="text" name="name" class="form-control" id="id_name" required>
-            </div>
-            
-            {% if form.errors %}
-                <div class="alert alert-danger">
-                    <ul>
-                        {% for field, errors in form.errors.items %}
-                            {% for error in errors %}
-                                <li>{{ field }}: {{ error }}</li>
-                            {% endfor %}
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endif %}
 
-            <button type="submit" class="btn btn-primary">Create Budget</button>
+            <!-- Budget Name Field -->
+            <div class="form-group">
+                {{ budget_form.name.label_tag }}
+                {{ budget_form.name }}
+                {% for error in budget_form.name.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <hr>
+
+            <!-- Category Fields Container -->
+            <div id="category-fields">
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="category_name">Category Name</label>
+                        <input type="text" name="category_name" class="form-control" required>
+                    </div>
+                    <div class="col">
+                        <label for="amount">Amount</label>
+                        <input type="number" name="amount" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button to add more category fields -->
+            <button type="button" class="btn btn-secondary" onclick="addCategoryField()">Add Another Category</button>
+
+            <hr>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Create Budget & Add Entry</button>
             <a href="{% url 'budget_list' %}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>

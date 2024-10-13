@@ -14,7 +14,7 @@
         <ul class="list-group mt-4">
             {% for entry in budget.entries.all %}
             <li class="list-group-item">
-                <strong>{{ entry.category }}</strong> - ₹ {{ entry.amount }}
+                <strong>{{ entry.category.name }}</strong> - ₹ {{ entry.amount }}
             </li>
             {% empty %}
             <li class="list-group-item">No entries for this budget.</li>
@@ -22,7 +22,8 @@
         </ul>
 
         <div class="mt-4 text-center">
-            <a href="{% url 'budget_entry_create' %}" class="btn btn-success">Add Entry</a>
+            <!-- Pass the budget.id to the 'budget_entry_create' URL -->
+            {% comment %} <a href="{% url 'budget_and_entry_create' budget.id %}" class="btn btn-success">Add Entry</a> {% endcomment %}
             <a href="{% url 'budget_list' %}" class="btn btn-primary">Back to Budget List</a>
         </div>
     </div>

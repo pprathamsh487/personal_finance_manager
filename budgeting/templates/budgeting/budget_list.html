@@ -15,7 +15,8 @@
             {% for budget in budgets %}
             <li class="list-group-item">
                 <strong>{{ budget.name }}</strong>
-                <a href="{% url 'budget_detail' budget.id %}" class="btn btn-primary btn-sm float-right">View Details</a>
+                <!-- Link to view budget details -->
+                <a href="{% url 'budget_detail' budget.id %}" class="btn btn-primary btn-sm float-right">View Budget</a>
             </li>
             {% empty %}
             <li class="list-group-item">You have no budgets yet.</li>
@@ -23,7 +24,7 @@
         </ul>
 
         <div class="mt-4 text-center">
-            <a href="{% url 'budget_entry_create' %}" class="btn btn-success">Set Up New Budget</a>
+            <a href="{% url 'budget_and_entry_create' %}" class="btn btn-success">Set Up New Budget</a>
         </div>
     </div>
 </body>
